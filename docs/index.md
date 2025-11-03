@@ -1,8 +1,8 @@
 # 🧩 Kaze.AdvancedQueue API
 
 Welcome to the official documentation for **Kaze.AdvancedQueue**,  
-a modular queue management system for Unturned.  
-This system lets developers or admins manage player priorities dynamically across servers.
+a modular queue management system for *Unturned*.  
+This system lets developers and server admins manage player priorities dynamically across servers.
 
 ---
 
@@ -11,31 +11,37 @@ This system lets developers or admins manage player priorities dynamically acros
 If you don’t use the API directly, **Kaze.AdvancedQueue** also provides simple in-game commands for managing priorities.
 
 ### 🔹 Add or Update a Player’s Priority
-```csharp
+```plaintext
 /addpriority <steamid64> <priority>
 ```
 
 **Example:**
-```csharp
+```plaintext
 /addpriority 76561198000000000 5
 ```
 
 Adds or updates a player’s queue priority level.  
 If the player already has one, it’s overwritten.  
 
+**Aliases:**  
+`/setpriority`, `/priorityadd`
+
 ---
 
 ### 🔹 Remove a Player’s Priority
-```csharp
+```plaintext
 /delpriority <steamid64>
 ```
 
 **Example:**
-```csharp
+```plaintext
 /delpriority 76561198000000000
 ```
 
 Removes a player from the priority list.
+
+**Aliases:**  
+`/removepriority`, `/prioritydel`
 
 ---
 
@@ -48,6 +54,7 @@ It provides simple, thread-safe access to queue priority operations.
 ```csharp
 using Kaze.AdvancedQueue.API;
 ```
+
 You can then access the API directly using its static methods:
 ```csharp
 AdvancedQueueAPI.UpdatePriority(steamID, 3);
@@ -81,7 +88,7 @@ public void Example(ulong steamID)
 - Remove players automatically when priority ≤ 0  
 - Read player priorities at runtime  
 - Retrieve all cached priority entries  
-- Persistent via LiteDB
+- Persistent via **LiteDB**
 
 ---
 
@@ -118,8 +125,8 @@ public class QueueDemoPlugin : RocketPlugin
 ## 🧱 About
 
 **Kaze.AdvancedQueue** is designed to make queue management modular, persistent, and easily extendable.  
-The API can be used directly by other developers or through in-game commands to manage ranks, priority slots, or reserved access systems.
+The API can be used directly by other developers or through in-game commands to manage ranks, priority slots, or reserved-access systems.
 
 ---
 
-(Thanks to ChatGPT for the doc)
+*(Documentation generated with ❤️ & ChatGPT)*
