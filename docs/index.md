@@ -1,7 +1,11 @@
 # 🧩 Kaze.AdvancedQueue API
 
-> 📖 **API Reference**  
-> ➡ [View the full API reference](api-reference.md)
+---
+
+## 📖 API Reference
+➡ [View the full API reference](api-reference.md)
+
+---
 
 Welcome to the official documentation for **Kaze.AdvancedQueue**,  
 a modular queue management system for *Unturned*.  
@@ -117,13 +121,6 @@ public class QueueDemoPlugin : RocketPlugin
     }
 }
 ```
-
----
-
-## 📖 API Reference
-➡ [View the full API reference](api-reference.md)
-
----
 
 ## 🧱 About
 
