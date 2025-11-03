@@ -50,7 +50,7 @@ using Kaze.AdvancedQueue.API;
 ```
 You can then access the API directly using its static methods:
 ```csharp
-AdvancedQueueAPI.AddPriority(steamID, 3);
+AdvancedQueueAPI.UpdatePriority(steamID, 3);
 ```
 
 ---
@@ -63,14 +63,14 @@ using Rocket.Core.Logging;
 public void Example(ulong steamID)
 {
     // Add or update the player's priority
-    AdvancedQueueAPI.AddPriority(steamID, 3);
+    AdvancedQueueAPI.UpdatePriority(steamID, 3);
 
     // Read their priority
     int prio = AdvancedQueueAPI.GetPriorityLevel(steamID);
     Logger.Log($"Player {steamID} now has priority level {prio}.");
 
     // Remove their priority by setting it to 0
-    AdvancedQueueAPI.AddPriority(steamID, 0);
+    AdvancedQueueAPI.UpdatePriority(steamID, 0);
 }
 ```
 
