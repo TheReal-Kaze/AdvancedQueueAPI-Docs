@@ -99,17 +99,11 @@ public class QueueDemoPlugin : RocketPlugin
         Provider.onEnemyConnected += player =>
         {
             ulong id = player.playerID.steamID.m_SteamID;
-            AdvancedQueueAPI.AddPriority(id, 5);
+            AdvancedQueueAPI.UpdatePriority(id, 5);
             Logger.Log($"[QueueDemo] {id} now has priority {AdvancedQueueAPI.GetPriorityLevel(id)}.");
         };
 
         Logger.Log($"{Name} loaded and hooked into AdvancedQueue API.");
-    }
-
-    protected override void Unload()
-    {
-        Provider.onEnemyConnected -= null;
-        Logger.Log($"{Name} has been unloaded!");
     }
 }
 ```
