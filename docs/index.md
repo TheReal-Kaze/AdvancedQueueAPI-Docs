@@ -2,14 +2,13 @@
 
 ---
 
-## 📖 API Reference
-➡ [View the full API reference](api-reference.md)
-
----
-
 Welcome to the official documentation for **Kaze.AdvancedQueue**,  
 a modular queue management system for *Unturned*.  
 This system lets developers and server admins manage player priorities dynamically across servers.
+---
+
+## 📖 API Reference
+➡ [View the full API reference](api-reference.md)
 
 ---
 
