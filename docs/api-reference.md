@@ -121,3 +121,7 @@ This allows external plugins to:
     ulong id = player.playerID.steamID.m_SteamID;
     AdvancedQueueAPI.UpdatePriority(id, 3);
     Logger.Log($"Player {id} priority: {AdvancedQueueAPI.GetPriorityLevel(id)}");
+
+---
+
+*(Documentation generated with ❤️ by ChatGPT)*
