@@ -9,7 +9,7 @@
 ## 🔗 Back to Overview
 
 For general information, in-game commands, features, and integration examples, see:  
-➡ [Kaze.AdvancedQueue API](README.md)
+➡ [Kaze.AdvancedQueue API](index.md)
 
 ---
 
