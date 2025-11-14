@@ -1,103 +1,132 @@
-# 🧩 Kaze.AdvancedQueue API
+# 🧩 Kaze.AdvancedQueue API Overview
 
 Welcome to the official documentation for **Kaze.AdvancedQueue**,  
-a modular queue management system for *Unturned*.  
-This system lets developers and server admins manage player priorities dynamically across servers.
+a modular and extensible queue management system for *Unturned*.  
+
+This system allows servers and developers to manage dynamic player priorities,  
+implement reserved slots, VIP handling, admin bypasses, and cross-server logic.
 
 ---
 
-## 📖 API Reference
-➡ [View the full API reference](api-reference.md)
+## 🔗 Full API Reference
+
+For the detailed method list (UpdatePriority, RemovePriority, events, models, etc.), see:  
+➡ **[AdvancedQueueAPI Reference](api-reference.md)**
 
 ---
 
-## 🧰 Command Usage (In-Game)
+# 🧰 In-Game Commands
 
-If you don’t use the API directly, **Kaze.AdvancedQueue** also provides simple in-game commands for managing priorities.
+Kaze.AdvancedQueue provides simple commands for administrators who prefer not to interact directly with the C# API.
 
-### 🔹 Add or Update a Player’s Priority
-```plaintext
+---
+
+## 🔹 Add or Update a Player’s Priority
+
+```
 /addpriority <steamid64> <priority>
 ```
 
 **Example:**
-```plaintext
+
+```
 /addpriority 76561198000000000 5
 ```
 
-Adds or updates a player’s queue priority level.  
-If the player already has one, it’s overwritten.  
+Adds or updates the priority. If the player already has a priority entry, it is overwritten.
 
 **Aliases:**  
-`/setpriority`, `/priorityadd`
+`/setpriority`  
+`/priorityadd`
 
 ---
 
-### 🔹 Remove a Player’s Priority
-```plaintext
+## 🔹 Remove a Player’s Priority
+
+```
 /delpriority <steamid64>
 ```
 
 **Example:**
-```plaintext
+
+```
 /delpriority 76561198000000000
 ```
 
-Removes a player from the priority list.
+Removes the player from the priority list completely.
 
 **Aliases:**  
-`/removepriority`, `/prioritydel`
+`/removepriority`  
+`/prioritydel`
 
 ---
 
-## 🚀 API Overview
+# 🚀 API Overview
 
-`Kaze.AdvancedQueue.API` is a static C# API built around the internal `PriorityManager`.  
-It provides simple, thread-safe access to queue priority operations.
+The namespace to include in your plugin:
 
-### 🔧 Import the namespace
 ```csharp
 using Kaze.AdvancedQueue.API;
 ```
 
-You can then access the API directly using its static methods:
+The entire API is exposed through the static class:
+
+```
+AdvancedQueueAPI
+```
+
+There is **no initialization needed**—the plugin automatically assigns  
+its internal manager to the API at startup.
+
+You can access all operations using static methods like:
+
 ```csharp
 AdvancedQueueAPI.UpdatePriority(steamID, 3);
 ```
 
 ---
 
-## 📘 Example Usage
+# 📘 Basic Example Usage
+
 ```csharp
 using Kaze.AdvancedQueue.API;
 using Rocket.Core.Logging;
 
 public void Example(ulong steamID)
 {
-    // Add or update the player's priority
+    // Add or update the player's priority level
     AdvancedQueueAPI.UpdatePriority(steamID, 3);
 
-    // Read their priority
+    // Read the player's priority
     int prio = AdvancedQueueAPI.GetPriorityLevel(steamID);
-    Logger.Log($"Player {steamID} now has priority level {prio}.");
+    Logger.Log($"Player {steamID} now has priority {prio}.");
 
-    // Remove their priority by setting it to 0
+    // Remove a player's priority by setting it to 0
     AdvancedQueueAPI.UpdatePriority(steamID, 0);
 }
 ```
 
 ---
 
-## 📂 API Features
-- Add or update priority levels dynamically  
-- Remove players automatically when priority ≤ 0  
-- Read player priorities at runtime  
-- Retrieve all cached priority entries  
-- Persistent via **LiteDB**
+# 📂 Features
+
+Kaze.AdvancedQueue provides:
+
+- Dynamic runtime priority management  
+- Automatic removal when priority <= 0  
+- Priority and player data persistence through **LiteDB**  
+- Ability to retrieve all priority values  
+- Queue sorting integration via **Harmony patching**  
+- Admin bypass support  
+- Extra slot handling  
+- New: **Pre-order event** exposed by the API  
 
 ---
 
-## ⚙️ Example Integration (Rocket plugin)
+# ⚙️ Example Integration (Rocket Plugin)
+
+Below is a simple RocketMod plugin showing how to use the API during player connection.
+
 ```csharp
 using Kaze.AdvancedQueue.API;
 using Rocket.Core.Logging;
@@ -108,6 +137,13 @@ public class QueueDemoPlugin : RocketPlugin
 {
     protected override void Load()
     {
+        // Log each queue reordering moment
+        AdvancedQueueAPI.OnPreOrder += () =>
+        {
+            Logger.Log("[QueueDemo] Queue is being reordered...");
+        };
+
+        // Give default priority to new players
         Provider.onEnemyConnected += player =>
         {
             ulong id = player.playerID.steamID.m_SteamID;
@@ -122,11 +158,26 @@ public class QueueDemoPlugin : RocketPlugin
 
 ---
 
-## 🧱 About
+# 🧱 About Kaze.AdvancedQueue
 
-**Kaze.AdvancedQueue** is designed to make queue management modular, persistent, and easily extendable.  
-The API can be used directly by other developers or through in-game commands to manage ranks, priority slots, or reserved-access systems.
+Kaze.AdvancedQueue was designed to offer:
+
+- A modular queue system  
+- Persistence without configuration  
+- Integration points for developers  
+- Compatibility with other plugins  
+- High performance priority sorting  
+- A clean and intuitive C# API  
+
+It is suitable for:
+
+- VIP tiers  
+- Donator ranks  
+- Admin bypass logic  
+- Reserved slots  
+- Multi-server networks  
+- Custom gameplay queue systems  
 
 ---
 
-*(Documentation generated with ❤️ & ChatGPT)*
+*(Documentation generated with ❤️ by ChatGPT)*
